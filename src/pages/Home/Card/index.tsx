@@ -13,7 +13,12 @@ export function Card({ issueNumber, title, date, preview }: CardProps) {
   const daysGap = formatGap(date)
   return (
     <CardWrapper>
-      <Link to={`/article/${issueNumber}`}>
+      <Link
+        to={`/article/${issueNumber}`}
+        onClick={() => {
+          window.scrollTo(0, 0)
+        }}
+      >
         <Header>
           <h3>{title}</h3>
           <span>{daysGap}</span>

@@ -24,12 +24,12 @@ export const Header = styled.header`
   justify-content: space-between;
   margin-bottom: 1.25rem;
   h3 {
-    max-width: 80%;
+    width: 80%;
     color: ${(props) => props.theme['base-title']};
   }
   span {
     color: ${(props) => props.theme['base-span']};
     font-size: 0.875rem;
-    max-width: 10%rem;
+    text-align: right;
   }
 `

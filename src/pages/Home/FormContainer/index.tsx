@@ -1,10 +1,14 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { BlogContext } from '../../../context/Blog'
 import { ComponentWrapper, Input } from './styles'
 import { useForm } from 'react-hook-form'
 
 export function FormContainer() {
-  const { issues, fetchIssues } = useContext(BlogContext)
+  const [issues, fetchIssues] = useContextSelector(BlogContext, (context) => {
+    return [context.issues, context.fetchIssues]
+  })
+
   const { register, watch, handleSubmit, reset } = useForm()
   const [isHidden, setIsHidden] = useState(true)
 

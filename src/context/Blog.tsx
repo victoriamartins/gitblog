@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { createContext } from 'use-context-selector'
 import { listIssuesAPI, profileAPI } from '../lib/axios'
 
 interface UserType {
@@ -41,7 +42,7 @@ export function BlogProvider({ children }: BlogProviderProps) {
   const [user, setUser] = useState<UserType>({} as UserType)
   const [issues, setIssues] = useState<IssueType[]>([])
 
-  async function fetchProfile(query: string) {
+  const fetchProfile = useCallback(async (query: string) => {
     const { data } = await profileAPI.get(`users/${query}`)
     setUser({
       name: data.name,
@@ -51,32 +52,30 @@ export function BlogProvider({ children }: BlogProviderProps) {
       htmlUrl: data.html_url,
       login: data.login,
     })
-  }
+  }, [])
 
-  async function fetchIssues(
-    user: string,
-    repo: string,
-    label: string,
-    query: string = '',
-  ) {
-    const { data } = await listIssuesAPI.get(
-      `issues?q=repo:${user}/${repo} label:${label} ${query}`,
-    )
+  const fetchIssues = useCallback(
+    async (user: string, repo: string, label: string, query: string = '') => {
+      const { data } = await listIssuesAPI.get(
+        `issues?q=repo:${user}/${repo} label:${label} ${query}`,
+      )
 
-    const issuesList: IssueType[] = data.items.map((item) => {
-      const issue: IssueType = {
-        title: item.title,
-        text: item.body,
-        comments: item.comments,
-        createdAt: item.created_at,
-        htmlUrl: item.html_url,
-        issueNumber: item.number,
-      }
-      return issue
-    })
+      const issuesList: IssueType[] = data.items.map((item) => {
+        const issue: IssueType = {
+          title: item.title,
+          text: item.body,
+          comments: item.comments,
+          createdAt: item.created_at,
+          htmlUrl: item.html_url,
+          issueNumber: item.number,
+        }
+        return issue
+      })
 
-    setIssues(issuesList)
-  }
+      setIssues(issuesList)
+    },
+    [],
+  )
 
   function getFullIssue(issueNumber: number) {
     if (issues.length > 0) {

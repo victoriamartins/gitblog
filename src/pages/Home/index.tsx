@@ -9,11 +9,13 @@ import { GithubLogo, Buildings, Users, Link } from 'phosphor-react'
 import { Articles } from './Articles'
 import { FormContainer } from './FormContainer'
 import { Cover } from '../../components/Cover'
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { BlogContext } from '../../context/Blog'
 
 export function Home() {
-  const { user } = useContext(BlogContext)
+  const user = useContextSelector(BlogContext, (context) => {
+    return context.user
+  })
   const { name, bio, company, login, followers, htmlUrl } = user
 
   return (

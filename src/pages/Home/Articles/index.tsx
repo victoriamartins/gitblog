@@ -1,11 +1,13 @@
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { Card } from '../Card'
 import { Main } from './styles'
 import { BlogContext } from '../../../context/Blog'
 import removeMarkdown from 'markdown-to-text'
 
 export function Articles() {
-  const { issues } = useContext(BlogContext)
+  const issues = useContextSelector(BlogContext, (context) => {
+    return context.issues
+  })
   return (
     <Main>
       {issues.map((issue) => {

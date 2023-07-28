@@ -9,17 +9,16 @@ import {
 import { Article, Footer, HeaderLink, Section } from './styles'
 import { useParams, Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { BlogContext, IssueType } from '../../context/Blog'
 import { formatGap } from '../../lib/dateFns'
 
 export function FullArticle() {
   const { id } = useParams()
 
-  const {
-    user: { login },
-    getFullIssue,
-  } = useContext(BlogContext)
+  const [login, getFullIssue] = useContextSelector(BlogContext, (context) => {
+    return [context.user.login, context.getFullIssue]
+  })
 
   const issue = getFullIssue(Number(id)) || ({} as IssueType)
   const timeStamp = issue.createdAt
