@@ -22,4 +22,4 @@ There are two main interfaces: the homepage (with my profile, articles, and a se
 
 ## Next steps
 
-- [ ] Mobile interface
+- [x] Mobile interface
