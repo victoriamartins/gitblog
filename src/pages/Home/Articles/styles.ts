@@ -9,4 +9,9 @@ export const Main = styled.main`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
 `

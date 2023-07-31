@@ -27,6 +27,10 @@ export const Profile = styled.section`
     color: ${(props) => props.theme['base-text']};
     font-size: 1rem;
     line-height: 160%;
+    @media (max-width: 800px) {
+      text-align: center;
+      margin-top: 1rem;
+    }
   }
 
   aside {
@@ -34,6 +38,14 @@ export const Profile = styled.section`
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+  }
+
+  @media (max-width: 800px) {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
   }
 `
 
@@ -75,5 +87,12 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
   }
 `

@@ -24,6 +24,10 @@ export const Section = styled.section`
     line-height: 130%;
     margin-block: 1.25rem 0.5rem;
   }
+
+  @media (max-width: 800px) {
+    width: 95%;
+  }
 `
 
 export const Footer = styled.footer`
@@ -35,6 +39,13 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
   }
 `
 
